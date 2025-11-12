@@ -1,1 +1,277 @@
 
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fecuro Lamoue • OSINT • Social Engineering • FinCrime</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --surface: #121212;
+      --elevate: #1a1a1a;
+      --text: #f0f0f0;
+      --sub: #888;
+      --accent: #00d1ff;
+      --glow: rgba(0, 209, 255, 0.25);
+      --border: #2a2a2a;
+      --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 60px;
+      position: relative;
+    }
+
+    .avatar {
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 24px;
+      border-radius: 50%;
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 2px solid var(--border);
+      box-shadow: 0 0 20px var(--glow);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .avatar::before {
+      content: "?";
+      font-size: 64px;
+      font-weight: 700;
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      background: linear-gradient(to right, var(--text), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--sub);
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 16px;
+    }
+
+    .socials a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--surface);
+      color: var(--text);
+      font-size: 1.2rem;
+      text-decoration: none;
+      transition: var(--transition);
+      border: 1px solid var(--border);
+    }
+
+    .socials a:hover {
+      background: var(--accent);
+      color: var(--bg);
+      transform: translateY(-4px) scale(1.1);
+      box-shadow: 0 8px 20px var(--glow);
+    }
+
+    section {
+      background: var(--surface);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 40px;
+      border: 1px solid var(--border);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s forwards;
+    }
+
+    section:nth-child(2) { animation-delay: 0.2s; }
+    section:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+    }
+
+    h2 i {
+      color: var(--accent);
+    }
+
+    .bio p, .expertise ul {
+      margin-bottom: 16px;
+      font-size: 1.05rem;
+    }
+
+    .expertise ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .expertise li {
+      background: var(--elevate);
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      transition: var(--transition);
+    }
+
+    .expertise li:hover {
+      background: var(--accent);
+      color: var(--bg);
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--sub);
+      font-size: 0.95rem;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .pulse {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background: var(--accent);
+      border-radius: 50%;
+      margin-right: 8px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 var(--glow); }
+      70% { box-shadow: 0 0 0 10px transparent; }
+      100% { box-shadow: 0 0 0 0 transparent; }
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 2.2rem; }
+      .avatar { width: 110px; height: 110px; }
+      section { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="avatar"></div>
+      <h1>Fecuro Lamoue</h1>
+      <p class="subtitle">Social Engineering • Cybersecurity • Financial Crime</p>
+      <div class="socials">
+        <a href="https://github.com/fecuro" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://t.me/fecuro" target="_blank" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+        <a href="mailto:fecuro@proton.me" aria-label="Email"><i class="fas fa-envelope"></i></a>
+      </div>
+    </header>
+
+    <section class="bio">
+      <h2><i class="fas fa-user-secret"></i> Обо мне</h2>
+      <p>
+        Исследователь в области информационной безопасности, специализируюсь на методах социальной инженерии и расследовании финансовых преступлений. Мои работы лежат на стыке человеческой психологии и цифровых угроз.
+      </p>
+      <p>
+        Работаю с OSINT, фишинг-симуляциями, анализом мошеннических схем и защитой критически важных активов.
+      </p>
+    </section>
+
+    <section class="expertise">
+      <h2><i class="fas fa-shield-alt"></i> Экспертиза</h2>
+      <ul>
+        <li>Social Engineering</li>
+        <li>OSINT & Recon</li>
+        <li>Financial Crime Analysis</li>
+        <li>Phishing Simulations</li>
+        <li>Threat Intelligence</li>
+        <li>Red Teaming</li>
+      </ul>
+    </section>
+
+    <footer>
+      <p><span class="pulse"></span> Fecuro Lamoue • Красноярск, 2025</p>
+    </footer>
+  </div>
+
+  <script>
+    // Простая анимация появления при скролле (опционально)
+    document.querySelectorAll('section').forEach(section => {
+      section.style.opacity = "0";
+      section.style.transform = "translateY(20px)";
+      section.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = "1";
+          entry.target.style.transform = "translateY(0)";
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('section').forEach(section => observer.observe(section));
+  </script>
+</body>
+</html>
